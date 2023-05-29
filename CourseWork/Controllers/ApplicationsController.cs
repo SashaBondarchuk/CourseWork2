@@ -175,7 +175,6 @@ namespace CourseWork.Controllers
             var application = await _context.Applications.FindAsync(id);
             if (application != null)
             {
-                var studentToUpdate = _context.Students.Single(s => s.StudentId == application.StudentId);
                 if (application != null)
                 {
                     var studentToUpdate = _context.Students.Single(s => s.StudentId == application.StudentId);
