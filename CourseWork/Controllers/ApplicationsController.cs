@@ -176,15 +176,16 @@ namespace CourseWork.Controllers
             if (application != null)
             {
                 var studentToUpdate = _context.Students.Single(s => s.StudentId == application.StudentId);
-                if (studentToUpdate.BooksCount == 0)
+                if (application != null)
                 {
-                    var error = new ErrorViewModel();
-                    return View(error);
-                    //"Студент не має книг";
+                    var studentToUpdate = _context.Students.Single(s => s.StudentId == application.StudentId);
+                    if (studentToUpdate.BooksCount != 0)
+                    {
+                        studentToUpdate.BooksCount--;
+                        _context.Update(studentToUpdate);
+                    }
+                    _context.Applications.Remove(application);
                 }
-                studentToUpdate.BooksCount--;
-                _context.Update(studentToUpdate);
-                _context.Applications.Remove(application);
             }
             
             await _context.SaveChangesAsync();
